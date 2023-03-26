@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { pipe, switchMap, tap } from 'rxjs';
 import { PaisSmall } from '../../interfaces/pais.interface';
 import { PaisesService } from '../../services/paises.service';
 
@@ -25,16 +26,25 @@ export class SelectorComponent implements OnInit {
   ngOnInit(): void {
     this.continentes = this.paisesService.continentes;
 
-    this.miFormulario.controls['continente'].valueChanges.subscribe(
-      (valorContiente) => {
-        this.paisesService
-          .getPaisesByContinente(valorContiente)
-          .subscribe((respPaises) => {
-            console.log(respPaises);
-            this.paises = respPaises;
-          });
-      }
-    );
+    // this.miFormulario.controls['continente'].valueChanges.subscribe(
+    //   (valorContiente) => {
+    //     this.paisesService
+    //       .getPaisesByContinente(valorContiente)
+    //       .subscribe((respPaises) => {
+    //         this.paises = respPaises;
+    //       });
+    //   }
+    // );
+
+    this.miFormulario
+      .get('continente')
+      ?.valueChanges.pipe(
+        switchMap((valorContinente) =>
+          this.paisesService.getPaisesByContinente(valorContinente)
+        ),
+        tap((_) => this.miFormulario.get('pais')?.reset(''))
+      )
+      .subscribe((respPaises) => (this.paises = respPaises));
   }
 
   guardar() {
