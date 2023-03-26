@@ -18,7 +18,7 @@
         </select>
       </div>
       <!-- Campo -->
-      <div class="col-12 mt-2">
+      <div class="col-12 mt-2" *ngIf="paises.length > 0">
         <label class="form-label">País</label>
         <select formControlName="pais" class="form-select">
           <option value="">-- Seleccione el País --</option>
@@ -28,7 +28,7 @@
         </select>
       </div>
       <!-- Campo -->
-      <div class="col-12 mt-2">
+      <div class="col-12 mt-2" *ngIf="fronteras.length > 0">
         <label class="form-label">Fronteras</label>
         <select formControlName="frontera" class="form-select">
           <option value="">-- Seleccione la Frontera --</option>
@@ -36,6 +36,14 @@
             {{ frontera }}
           </option>
         </select>
+      </div>
+      <!-- Loader -->
+      <div class="col-12 mt-2 text-center">
+        <div
+          *ngIf="loading"
+          class="input-group-text spinner-border"
+          role="status"
+        ></div>
       </div>
       <!-- Botón -->
       <div class="col-12 mt-3">
@@ -57,6 +65,10 @@
   <div class="col">
     <label class="form-label">Valid</label>
     <pre>{{ miFormulario.valid | json }}</pre>
+  </div>
+  <div class="col">
+    <label class="form-label">Status</label>
+    <pre>{{ miFormulario.status | json }}</pre>
   </div>
   <div class="col">
     <label class="form-label">Value</label>
