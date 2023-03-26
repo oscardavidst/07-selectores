@@ -38,12 +38,8 @@
         </select>
       </div>
       <!-- Loader -->
-      <div class="col-12 mt-2 text-center">
-        <div
-          *ngIf="loading"
-          class="input-group-text spinner-border"
-          role="status"
-        ></div>
+      <div *ngIf="loading" class="col-12 mt-3 text-center">
+        <div class="input-group-text spinner-border" role="status"></div>
       </div>
       <!-- Botón -->
       <div class="col-12 mt-3">

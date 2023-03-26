@@ -55,8 +55,8 @@ export class SelectorComponent implements OnInit {
           this.miFormulario.get('frontera')?.reset('');
           this.loading = true;
         }),
-        delay(2000),
-        switchMap((codigo) => this.paisesService.getFronterasByCode(codigo))
+        switchMap((codigo) => this.paisesService.getFronterasByCode(codigo)),
+        delay(2000)
       )
       .subscribe((fronteras) => {
         this.fronteras = fronteras ? fronteras.borders : [];
