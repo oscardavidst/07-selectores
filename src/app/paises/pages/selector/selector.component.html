@@ -17,6 +17,16 @@
           </option>
         </select>
       </div>
+      <!-- Campo -->
+      <div class="col-12 mt-2">
+        <label class="form-label">País</label>
+        <select formControlName="pais" class="form-select">
+          <option value="">-- Seleccione el País --</option>
+          <option *ngFor="let pais of paises" [value]="pais.cca3">
+            {{ pais.name.common }}
+          </option>
+        </select>
+      </div>
       <!-- Botón -->
       <div class="col-12 mt-3">
         <button
