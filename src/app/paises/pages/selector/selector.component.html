@@ -27,6 +27,16 @@
           </option>
         </select>
       </div>
+      <!-- Campo -->
+      <div class="col-12 mt-2">
+        <label class="form-label">Fronteras</label>
+        <select formControlName="frontera" class="form-select">
+          <option value="">-- Seleccione la Frontera --</option>
+          <option *ngFor="let frontera of fronteras" [value]="frontera">
+            {{ frontera }}
+          </option>
+        </select>
+      </div>
       <!-- Botón -->
       <div class="col-12 mt-3">
         <button
