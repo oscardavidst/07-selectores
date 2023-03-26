@@ -1,1 +1,41 @@
-<p>selector works!</p>
+<h1 class="mt-3">Selectores anidaos</h1>
+<hr />
+
+<div class="row">
+  <div class="col">
+    <form [formGroup]="miFormulario">
+      <!-- Campo -->
+      <div class="col-12">
+        <label class="form-label">Continente</label>
+        <select formControlName="continente" class="form-select">
+          <option value="">-- Seleccione el Continente --</option>
+          <option
+            *ngFor="let continente of continentes"
+            [value]="continente | lowercase"
+          >
+            {{ continente }}
+          </option>
+        </select>
+      </div>
+      <!-- Botón -->
+      <div class="col-12 mt-3">
+        <button
+          class="btn btn-primary float-end"
+          type="button"
+          (click)="guardar()"
+        >
+          <i class="bi bi-globe-americas"></i>
+          Guardar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <h5>Formulario</h5>
+  <div class="col">
+    <label class="form-label">Value</label>
+    <pre>{{ miFormulario.value | json }}</pre>
+  </div>
+</div>
