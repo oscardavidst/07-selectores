@@ -19,7 +19,7 @@ export class SelectorComponent implements OnInit {
 
   continentes: string[] = [];
   paises: PaisSmall[] = [];
-  fronteras: string[] = [];
+  fronteras: PaisSmall[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -56,10 +56,15 @@ export class SelectorComponent implements OnInit {
           this.loading = true;
         }),
         switchMap((codigo) => this.paisesService.getFronterasByCode(codigo)),
-        delay(2000)
+        switchMap((fronteras) =>
+          this.paisesService.getPaisesByCodes(
+            fronteras?.borders!
+            // fronteras === null ? [] : fronteras.borders
+          )
+        )
       )
-      .subscribe((fronteras) => {
-        this.fronteras = fronteras ? fronteras.borders : [];
+      .subscribe((paises) => {
+        this.fronteras = paises;
         this.loading = false;
       });
   }
